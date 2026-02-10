@@ -1,0 +1,89 @@
+
+{
+  "transactions": [
+    {
+      "id": "1",
+      "title": "Netflix Subscription",
+      "category": "Entertainment",
+      "date": "2025-08-15",
+      "amount": -950,
+      "isIncome": false
+    },
+    {
+      "id": "2",
+      "title": "Groceries",
+      "category": "Shopping",
+      "date": "2025-08-14",
+      "amount": -2400,
+      "isIncome": false
+    },
+    {
+      "id": "3",
+      "title": "Salary",
+      "category": "Income",
+      "date": "2025-08-10",
+      "amount": 45000,
+      "isIncome": true
+    },
+
+    {
+      "id": "4",
+      "title": "Uber Ride",
+      "category": "Transport",
+      "date": "2025-08-09",
+      "amount": -380,
+      "isIncome": false
+    },
+    {
+      "id": "5",
+      "title": "Coffee",
+      "category": "Food",
+      "date": "2025-08-09",
+      "amount": -120,
+      "isIncome": false
+    },
+    {
+      "id": "6",
+      "title": "Electricity Bill",
+      "category": "Utilities",
+      "date": "2025-08-08",
+      "amount": -3200,
+      "isIncome": false
+    },
+
+    {
+      "id": "7",
+      "title": "Freelance Payment",
+      "category": "Income",
+      "date": "2025-08-07",
+      "amount": 12000,
+      "isIncome": true
+    },
+    {
+      "id": "8",
+      "title": "Restaurant",
+      "category": "Food",
+      "date": "2025-08-07",
+      "amount": -1800,
+      "isIncome": false
+    },
+    {
+      "id": "9",
+      "title": "Internet Bill",
+      "category": "Utilities",
+      "date": "2025-08-06",
+      "amount": -1500,
+      "isIncome": false
+    },
+
+    {
+      "id": "10",
+      "title": "Bonus",
+      "category": "Income",
+      "date": "2025-08-05",
+      "amount": 8000,
+      "isIncome": true
+    }
+
+  ]
+}
