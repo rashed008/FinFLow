@@ -6,26 +6,17 @@
 //
 
 import SwiftUI
-
-//@main
-//struct FinFlowApp: App {
-//    var body: some Scene {
-//        WindowGroup {
-//            LoginView()
-//        }
-//    }
-//}
-
-
 @main
 struct FinFlowApp: App {
-
+    
+    @StateObject private var transactionService = TransactionService()
     @StateObject private var appState = AppState()
-
+    
     var body: some Scene {
         WindowGroup {
             RootView()
                 .environmentObject(appState)
+                .environmentObject(transactionService) 
         }
     }
 }

@@ -1,47 +1,37 @@
-////
-////  TransactionHistoryView.swift
-////  FinFlow
-////
-////  Created by RASHED on 2/8/26.
-////
+
+//
+//  TransactionHistoryView.swift
+//  FinFlow
+//
+//  Created by RASHED on 2/8/26.
+//
 
 import SwiftUI
 
 struct TransactionHistoryView: View {
     
-    @StateObject private var viewModel = TransactionHistoryViewModel()
+    @EnvironmentObject var service: TransactionService
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         ZStack {
+            
             Color(red: 0.97, green: 0.97, blue: 0.98)
                 .ignoresSafeArea()
             
             ScrollView {
                 VStack(spacing: 16) {
                     
-                    // Title
+                    // MARK: Title
                     Text("Transaction History")
                         .font(.system(size: 20, weight: .semibold))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top, 12)
                     
-                    // All Transactions
+                    // MARK: Sorted Transactions (Newest First)
                     VStack(spacing: 12) {
-                        ForEach(viewModel.transactions) { transaction in
+                        ForEach(sortedTransactions) { transaction in
                             TransactionRowView(transaction: transaction)
-                        }
-                    }
-                    
-                    // Today Section
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Today")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(.gray)
-                            .padding(.leading, 4)
-                        
-                        ForEach(viewModel.transactions.filter { $0.isToday }) {
-                            TransactionRowView(transaction: $0)
                         }
                     }
                     
@@ -50,7 +40,7 @@ struct TransactionHistoryView: View {
                 .padding(.horizontal, 16)
             }
         }
-        //Navigation bar back button
+        // MARK: Navigation Back Button
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -65,14 +55,29 @@ struct TransactionHistoryView: View {
                 }
             }
         }
-        .task {
-            await viewModel.loadTransactions()
+    }
+}
+
+// MARK: - Sorting Logic
+
+private extension TransactionHistoryView {
+    
+    var sortedTransactions: [Transaction] {
+        service.transactions.sorted {
+            parseDate($0.date) > parseDate($1.date)
         }
+    }
+    
+    func parseDate(_ string: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.date(from: string) ?? Date.distantPast
     }
 }
 
 #Preview {
     NavigationStack {
         TransactionHistoryView()
+            .environmentObject(TransactionService())
     }
 }

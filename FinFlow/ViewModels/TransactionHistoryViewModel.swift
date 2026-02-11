@@ -10,20 +10,18 @@ import Combine
 
 @MainActor
 final class TransactionHistoryViewModel: ObservableObject {
-
-    @Published var transactions: [Transaction] = []
-
-    private let service: TransactionServiceProtocol
-
-    init(service: TransactionServiceProtocol = TransactionService()) {
-        self.service = service
-    }
-
-    func loadTransactions() async {
-        transactions = await service.fetchTransactions()
+    
+    @Published private(set) var transactions: [Transaction] = []
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(service: TransactionService) {
+        // Observe the shared service
+        service.$transactions
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] updatedTransactions in
+                self?.transactions = updatedTransactions
+            }
+            .store(in: &cancellables)
     }
 }
-
-
-
-

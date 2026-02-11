@@ -9,4 +9,5 @@ import Foundation
 
 protocol TransactionServiceProtocol {
     func fetchTransactions() async -> [Transaction]
+    func sendMoney(receiverID: String, amount: Double) async throws -> [Transaction]
 }

@@ -15,23 +15,7 @@ final class LoginViewModel: ObservableObject {
     @Published var errorMessage: String?
     
     private let authService = AuthService()
-//    func login() -> Bool {
-//        guard Validators.isValidEmail(email),
-//              password.count >= 6 else {
-//            errorMessage = AppStrings.Login.errorInvalidCredentials
-//            return false
-//        }
-//        
-//        if authService.login(email: email, password: password) {
-//            errorMessage = nil
-//            isLoggedIn = true   //TRIGGER NAVIGATION
-//            return true
-//        } else {
-//            errorMessage = AppStrings.Login.errorInvalidCredentials
-//            return false
-//        }
-//    }
-    
+
     func login() -> Bool {
 
         guard Validators.isValidEmail(email) else {

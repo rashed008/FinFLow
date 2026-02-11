@@ -38,5 +38,18 @@ enum AppStrings {
         static let logout = "Log Out"
     }
     
+    struct SendFunds {
+        static let title = "Send Funds"
+        static let receiverLabel = "Receiver ID"
+        static let receiverPlaceholder = "Enter Receiver ID"
+        static let amountLabel = "Amount"
+        static let amountPlaceholder = "Enter Amount"
+        static let availableBalance = "Available balance"
+        static let sendButton = "Send Money"
+        static let successTitle = "Transfer Successful 🎉"
+        static let successMessage = "sent successfully."
+        static let insufficientBalance = "Amount exceeds available balance."
+    }
+    
 }
 

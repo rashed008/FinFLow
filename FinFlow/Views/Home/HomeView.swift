@@ -1,13 +1,17 @@
+
 import SwiftUI
 
 struct HomeView: View {
+    
     @State private var showLogoutAlert = false
+    
     @EnvironmentObject private var appState: AppState
-
+    @EnvironmentObject var service: TransactionService
+    
     var body: some View {
         NavigationStack {
             ZStack {
-                // Background
+                
                 Color(red: 0.97, green: 0.97, blue: 0.98)
                     .ignoresSafeArea()
 
@@ -28,7 +32,9 @@ struct HomeView: View {
 
                     // Balance Card
                     VStack(spacing: 6) {
-                        Text(AppStrings.Home.balanceAmount)
+                        
+            
+                        Text("৳ \(String(format: "%.2f", service.currentBalance))")
                             .font(.system(size: 26, weight: .bold))
                             .foregroundColor(.white)
 
@@ -68,7 +74,6 @@ struct HomeView: View {
                     // Action List
                     VStack(spacing: 12) {
 
-                        //Transaction History Navigation
                         NavigationLink {
                             TransactionHistoryView()
                         } label: {
@@ -79,11 +84,15 @@ struct HomeView: View {
                             )
                         }
 
-                        HomeRowExact(
-                            icon: "paperplane.fill",
-                            title: AppStrings.Home.sendFunds,
-                            iconColor: .green
-                        )
+                        NavigationLink {
+                            SendFundsView()
+                        } label: {
+                            HomeRowExact(
+                                icon: "paperplane.fill",
+                                title: AppStrings.Home.sendFunds,
+                                iconColor: .green
+                            )
+                        }
 
                         HomeRowExact(
                             icon: "rectangle.portrait.and.arrow.right",
@@ -111,6 +120,9 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
-        .environmentObject(AppState())
+    NavigationStack {
+        HomeView()
+            .environmentObject(AppState())
+            .environmentObject(TransactionService()) 
+    }
 }
